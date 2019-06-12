@@ -9,8 +9,8 @@ var svg,
 var graph = [], degrees = [];
 
 var k = 10;
-var g = 5e6;
-var d = 2;
+var g = 2e6;
+var d = 10;
 var delta = 0.002;
 
 function randomise_vel(fac){
