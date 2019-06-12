@@ -16,10 +16,11 @@ topic_count = defaultdict(int)
 links = defaultdict(list)
 
 def name(x):
-    return x.replace("_", " ").replace("%E2%80%93", "-")
+    return x.replace("_", " ").replace("%E2%80%93", "-").replace("%27","'")
 
 def save_json():
-    topics = [x for (x,y) in topic_count.items() if y>=(max(topic_count.values())//2)]
+    topics = [x for (x,y) in topic_count.items() if y>=15]
+    print("Hot topics:",topics,len(topics))
     nodes = [name(x) for x in topics]
     edges = []
     for a in links:
@@ -44,7 +45,7 @@ progress = 0
 while progress < 1000:
         topic = max(bfs_queue, key=lambda x: bfs_queue[x])
         bfs_queue.pop(topic)
-        print("\n\nGetting:", topic,f"\t(Progress: {progress/10}%)\n\n")
+        print("Getting:", topic,f"\t(Progress: {progress/10}%)")
         if topic in pages_collected:
             continue
         done = False
@@ -57,7 +58,7 @@ while progress < 1000:
         pages_collected.add(topic)
         tree = html.fromstring(page.content)
         if tree.text_content().lower().count(TOPIC.lower()) == 0:
-            print("\n\nDiscarding:",topic,"!\n\n")
+            print("Discarding:",topic,"!")
             discard(topic)
             continue
         progress += 1
@@ -77,8 +78,8 @@ while progress < 1000:
                 if new_topic not in all_topics:
                     all_topics += [new_topic]
             break
-        print(sorted(bfs_queue.items(), key=lambda x:-x[1]))
-        print("\n")
+        print("Next in queue:", sorted(bfs_queue.items(), key=lambda x:-x[1])[:5])
         pickle.dump(links, open("links.pickle", "wb"))
-        print("\n\n")
+        pickle.dump(topic_count, open("topic_count.pickle", "wb"))
         save_json()
+        print("")
