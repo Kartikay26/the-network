@@ -8,9 +8,10 @@ var svg,
 
 var graph = [], degrees = [];
 
-var k = 0.01;
-var g = 200;
-var d = 0.01;
+var k = 0.1;
+var g = 500;
+var d = 0.005;
+var delta = 0.005;
 
 // ------------- init ---------------
 
@@ -70,10 +71,10 @@ function physics() {
             force_x += - d * vx0;
             force_y += - d * vy0;
             // update (newton's law)
-            vx0 += force_x * 0.01;
-            vy0 += force_y * 0.01;
-            x0 += vx0 * 0.01;
-            y0 += vy0 * 0.01;
+            vx0 += force_x * delta;
+            vy0 += force_y * delta;
+            x0 += vx0 * delta;
+            y0 += vy0 * delta;
         }
         new_locations.push([x0, y0]);
         new_velocities.push([vx0, vy0]);

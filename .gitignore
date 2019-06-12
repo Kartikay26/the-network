@@ -4,3 +4,6 @@ data.json
 .pytest_cache/
 node_modules/
 old/
+
+*.pickle
+wikidmp/
