@@ -1,0 +1,6 @@
+data.json
+
+.vscode/
+.pytest_cache/
+node_modules/
+old/
