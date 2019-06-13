@@ -5,8 +5,8 @@ import pickle
 from lxml import html
 from collections import deque, defaultdict
 
-TOPIC = "India"
-importance = 30
+TOPIC = "Physics"
+importance = 100
 pages_get = 200
 
 try:
@@ -53,7 +53,7 @@ def save_json():
                 continue
             edges += [(i,j)]
     with open("data.json","w") as f:
-        f.write(json.dumps({"nodes": nodes, "edges": list(set(edges))}))
+        f.write(json.dumps({"nodes": nodes, "edges": (edges)}))
 
 def discard(topic):
     pass
